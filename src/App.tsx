@@ -1,21 +1,41 @@
-import { useState } from "react";
+import { FC, ReactNode } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import { Navbar } from "./components";
+import { ThemeProvider } from "./context";
+import { NotFound } from "./pages";
+import { routes } from "./utils";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/plots", label: "Plots on Sale" },
-  { href: "/visits", label: "Location Visits" },
-  { href: "/media", label: "Media" },
-];
+const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+  return (
+    <main className="w-full h-full min-h-screen min-w-screen dark:bg-brand-800 dark:text-brand-50">
+      <Navbar links={routes} />
+      <div className="container flex min-h-[80vh] items-center justify-center h-full py-10 mx-auto">
+        {children}
+      </div>
+    </main>
+  );
+};
 
 function App() {
   return (
-    <main className="w-screen h-full min-h-screen">
-      <Navbar links={links} />
-      <div className="container px-20 py-10 mx-auto"></div>
-    </main>
+    <ThemeProvider initialTheme="light">
+      <Layout>
+        <Router>
+          <Routes>
+            <Route path="*" element={<NotFound />} />
+            {routes.map(({ href, label, component: Component }, key) => (
+              <Route
+                key={key}
+                path={href}
+                element={<>{Component}</>}
+                loader={() => <p>Loading ${label}</p>}
+              />
+            ))}
+          </Routes>
+        </Router>
+      </Layout>
+    </ThemeProvider>
   );
 }
 
