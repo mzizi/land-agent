@@ -3,49 +3,54 @@ import { FiLogIn, FiMenu, FiPhoneCall, FiXSquare } from "react-icons/fi";
 
 import { Transition } from "@headlessui/react";
 
-export interface LinkType {
-  href: string;
-  label: string;
-}
+import { IRoute } from "../types";
+import { ThemeToggler } from "./ThemeToggler";
 
 export interface NavbarProps {
-  links: LinkType[];
+  links: IRoute[];
 }
 
 export const Navbar: FC<NavbarProps> = ({ links }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="w-full p-2 font-sans bg-black-50 text-black-900">
+    <nav className="w-full p-2 font-sans shadow-lg bg-brand-50 text-brand-900 dark:bg-brand-700 dark:text-brand-50">
       <div className="flex items-center justify-between h-16 mx-auto lg:container">
         <div className="flex items-center justify-between space-x-20">
           <div className="flex-shrink-0">
             <a
               href="/"
-              className="px-3 py-2 text-sm font-medium text-white rounded-md bg-black-700"
+              className="flex items-center gap-4 p-4 text-white rounded-md bg-brand-500"
             >
-              Land Agent Template
+              <div className="w-8 h-6">
+                <img
+                  alt="mzizi logo"
+                  src="/images/logo-dark-small.png"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <span className="text-sm font-semibold text-current">
+                Land Agent Template
+              </span>
             </a>
           </div>
-          <div className="flex-1 hidden lg:block">
-            <div className="flex items-baseline space-x-4 ">
-              {links.map((link) => (
-                <a
-                  href={link.href}
-                  key={link.href}
-                  className="px-3 py-2 text-xs font-medium text-current xl:text-sm border-y-2 hover:border-b-current"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+          <div className="items-baseline flex-1 hidden space-x-4 capitalize lg:flex">
+            {links.map((link) => (
+              <a
+                href={link.href}
+                key={link.href}
+                className="px-3 py-2 text-xs font-medium text-current border-transparent lg:text-sm border-y-2 hover:border-b-current"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
         <div className="flex gap-8">
-          <div className="items-center hidden gap-4 text-sm font-semibold md:flex">
+          <div className="items-center hidden gap-4 text-sm font-semibold capitalize lg:flex">
             <a
               href="/contact"
-              className="p-2.5 bg-black-700 rounded-md text-white"
+              className="p-2.5 bg-brand-700 rounded-md text-white dark:bg-white dark:text-brand-800"
             >
               <div className="flex items-center justify-center space-x-2 text-xs lg:text-sm">
                 <span>Contact</span>
@@ -61,6 +66,9 @@ export const Navbar: FC<NavbarProps> = ({ links }) => {
                 <FiLogIn />
               </div>
             </a>
+          </div>
+          <div className="hidden sm:block">
+            <ThemeToggler />
           </div>
           <button
             type="button"
@@ -88,20 +96,23 @@ export const Navbar: FC<NavbarProps> = ({ links }) => {
         leaveTo="opacity-0 scale-95"
       >
         <div className="lg:hidden" id="mobile-menu">
-          <div className="flex flex-col p-2 space-y-2 bg-white rounded-md shadow-lg">
+          <div className="flex flex-col p-2 space-y-2 capitalize bg-white rounded-md dark:bg-brand-700">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium text-current rounded-md hover:bg-black-500 hover:text-white"
+                className="px-3 py-2 text-sm font-medium text-current rounded-md lg:hidden hover:bg-brand-500 hover:text-white"
               >
                 {link.label}
               </a>
             ))}
-            <div className="flex items-center gap-8 py-4">
+            <div className="block sm:hidden">
+              <ThemeToggler />
+            </div>
+            <div className="flex flex-wrap items-center gap-8 py-4">
               <a
                 href="/contact"
-                className="p-2.5 bg-black-700 rounded-md text-white"
+                className="p-2.5 bg-brand-700 rounded-md text-white dark:bg-white dark:text-brand-800"
               >
                 <div className="flex items-center justify-center space-x-4">
                   <span>Contact</span>
