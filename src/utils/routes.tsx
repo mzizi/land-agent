@@ -1,4 +1,4 @@
-import { Home } from "../pages/Home";
+import { Contact, Home, NotFound } from "../pages";
 import { IRoute } from "../types";
 
 const routes: IRoute[] = [
@@ -10,27 +10,27 @@ const routes: IRoute[] = [
   {
     label: "About Us",
     href: "/about",
-    component: <Home />,
+    component: <NotFound />,
   },
   {
     label: "For Sale",
     href: "/sale",
-    component: <Home />,
+    component: <NotFound />,
   },
   {
     label: "Location Visits",
     href: "/visits",
-    component: <Home />,
+    component: <NotFound />,
   },
   {
     label: "Media",
     href: "/media",
-    component: <Home />,
+    component: <NotFound />,
   },
   {
     label: "Contact",
     href: "/contact",
-    component: <Home />,
+    component: <Contact />,
   },
 ];
 

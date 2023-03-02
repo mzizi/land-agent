@@ -1,14 +1,20 @@
-import { FC, useContext } from "react";
+import { FC, useMemo } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
 
-import { ThemeContext } from "../context";
+import { useTheme } from "../context";
 
 export const ThemeToggler: FC = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useTheme();
+  const styling = useMemo(() => {
+    if (theme === "dark") {
+      return "bg-accent-800 text-brand-50";
+    }
+    return "bg-accent-200 text-accent-500 ";
+  }, [theme]);
 
   return (
     <button
-      className="p-2 text-sm no-underline rounded-md shadow-inner bg-brand-100 dark:bg-brand-500"
+      className={`text-sm btn btn-outline capitalize rounded-md ${styling}`}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       <div className="flex items-center gap-2 font-semibold">
@@ -17,7 +23,7 @@ export const ThemeToggler: FC = () => {
         ) : (
           <FiMoon fontSize="1.5rem" />
         )}
-        <span className="flex-1 px-2 font-semibold">
+        <span className="flex-1 font-semibold">
           {theme === "light" ? "Light" : "Dark"}
         </span>
       </div>
