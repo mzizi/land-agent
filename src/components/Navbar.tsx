@@ -3,6 +3,7 @@ import { FiLogIn, FiMenu, FiPhoneCall, FiXSquare } from "react-icons/fi";
 
 import { Transition } from "@headlessui/react";
 
+import { useTheme } from "../context";
 import { IRoute } from "../types";
 import { ThemeToggler } from "./ThemeToggler";
 
@@ -11,25 +12,31 @@ export interface NavbarProps {
 }
 
 export const Navbar: FC<NavbarProps> = ({ links }) => {
+  const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="w-full p-2 font-sans shadow-lg bg-brand-50 text-brand-900 dark:bg-brand-700 dark:text-brand-50">
+    <nav className="fixed inset-0 z-50 w-full py-4 font-sans shadow-lg h-max bg-brand-50 text-brand-900 dark:bg-brand-700 dark:text-brand-50">
       <div className="flex items-center justify-between h-16 mx-auto lg:container">
         <div className="flex items-center justify-between space-x-20">
           <div className="flex-shrink-0">
-            <a
-              href="/"
-              className="flex items-center gap-4 p-4 text-white rounded-md bg-brand-500"
-            >
+            <a href="/" className="flex items-center gap-4 p-4 rounded-md">
               <div className="w-8 h-6">
-                <img
-                  alt="mzizi logo"
-                  src="/images/logo-dark-small.png"
-                  className="object-cover w-full h-full"
-                />
+                {theme === "dark" ? (
+                  <img
+                    alt="mzizi logo"
+                    src="/images/logo-dark-small.png"
+                    className="object-cover w-full h-full"
+                  />
+                ) : (
+                  <img
+                    alt="mzizi logo"
+                    src="/images/logo-small.png"
+                    className="object-cover w-full h-full"
+                  />
+                )}
               </div>
-              <span className="text-sm font-semibold text-current">
+              <span className="text-sm font-black text-current uppercase">
                 Land Agent Template
               </span>
             </a>

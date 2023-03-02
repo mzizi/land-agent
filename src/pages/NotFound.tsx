@@ -8,7 +8,7 @@ export const NotFound = () => {
       <h2 className="font-sans text-2xl capitalize">Page not found!</h2>
       <Link
         to="/"
-        className="px-6 py-4 text-white rounded-md bg-brand-800 dark:bg-brand-500 hover:shadow-lg"
+        className="text-lg text-white capitalize rounded-md btn btn-lg bg-accent-800 dark:bg-accent-500 hover:shadow-lg"
       >
         <div className="flex items-center gap-4 font-semibold">
           <FiArrowLeftCircle fontSize="2rem" />

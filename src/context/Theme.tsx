@@ -4,6 +4,7 @@ import {
   FC,
   ReactNode,
   SetStateAction,
+  useContext,
   useEffect,
   useState,
 } from "react";
@@ -11,7 +12,7 @@ import {
 export type ThemeType = "dark" | "light";
 
 export interface ThemeProviderProps {
-  initialTheme: ThemeType;
+  initialTheme?: ThemeType;
   children: ReactNode;
 }
 
@@ -69,4 +70,14 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
       {children}
     </ThemeContext.Provider>
   );
+};
+
+export const useTheme = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  if (!theme) {
+    throw new Error("Theme missing");
+  }
+
+  return { theme, setTheme };
 };
