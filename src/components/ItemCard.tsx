@@ -3,16 +3,16 @@ import { useMemo } from "react";
 import { useTheme } from "../context";
 
 export const ItemCard = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const styling = useMemo(() => {
     if (theme === "dark") {
       return "bg-accent-900/90 text-brand-50";
     }
-    return "bg-accent-200 text-accent-500 ";
+    return "bg-accent-50 text-accent-500 ";
   }, [theme]);
 
   return (
-    <div className="!h-[20rem] shadow-xl card lg:card-side bg-base-100">
+    <div className="!h-[20rem] shadow-2xl card lg:card-side bg-base-100">
       <figure className="w-full h-full lg:w-[50%] card-image">
         <img
           className="object-cover w-full h-full"
